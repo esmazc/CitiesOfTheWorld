@@ -15,18 +15,20 @@
    <children>
       <TableView fx:id="tableViewGradovi" prefHeight="200.0" prefWidth="477.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="colGradId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="colGradNaziv" prefWidth="100.0" text="Naziv" />
-            <TableColumn fx:id="colGradStanovnika" prefWidth="100.0" text="Stanovnika" />
-            <TableColumn fx:id="colGradDrzava" prefWidth="200.0" text="Država" />
+          <TableColumn fx:id="colGradId" prefWidth="75.0" text="%id" />
+          <TableColumn fx:id="colGradNaziv" prefWidth="100.0" text="%naziv" />
+            <TableColumn fx:id="colGradStanovnika" prefWidth="100.0" text="%brojStanovnika" />
+            <TableColumn fx:id="colGradDrzava" prefWidth="200.0" text="%drzava" />
         </columns>
       </TableView>
       <VBox prefWidth="120.0" spacing="5.0" GridPane.columnIndex="1">
          <children>
-            <Button fx:id="btnDodajGrad" mnemonicParsing="false" onAction="#dodajGradAction" prefWidth="115.0" text="Dodaj grad" />
-            <Button fx:id="btnDodajDrzavu" mnemonicParsing="false" onAction="#dodajDrzavuAction" prefWidth="115.0" text="Dodaj državu" />
-            <Button fx:id="btnIzmijeniGrad" mnemonicParsing="false" onAction="#izmijeniGradAction" prefWidth="115.0" text="Izmijeni grad" />
-            <Button fx:id="btnObrisiGrad" mnemonicParsing="false" onAction="#obrisiGradAction" prefWidth="115.0" text="Obriši grad" />
+            <Button fx:id="btnDodajGrad" mnemonicParsing="false" onAction="#dodajGradAction" prefWidth="115.0" text="%dodajGrad" />
+            <Button fx:id="btnDodajDrzavu" mnemonicParsing="false" onAction="#dodajDrzavuAction" prefWidth="115.0" text="%dodajDrzavu" />
+            <Button fx:id="btnIzmijeniGrad" mnemonicParsing="false" onAction="#izmijeniGradAction" prefWidth="115.0" text="%izmijeniGrad" />
+            <Button fx:id="btnObrisiGrad" mnemonicParsing="false" onAction="#obrisiGradAction" prefWidth="115.0" text="%obrisiGrad" />
+            <Button mnemonicParsing="false" onAction="#stampaAction" prefWidth="115.0" text="%stampa" />
+            <Button mnemonicParsing="false" onAction="#jezikAction" prefWidth="115.0" text="%jezik" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <GridPane alignment="CENTER" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/grad_drzava.css" />
@@ -22,17 +20,17 @@
       <RowConstraints />
     </rowConstraints>
     <children>
-        <Label text="Naziv:" />
-        <Label text="Država:" GridPane.rowIndex="2" />
+        <Label text="%nazivGrada" />
+        <Label text="%drzavaNaziv" GridPane.rowIndex="2" />
         <TextField fx:id="fieldNaziv" GridPane.columnIndex="1" />
         <ChoiceBox fx:id="choiceDrzava" prefHeight="26.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
             <buttons>
-                <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onOkClick" text="Ok" />
-                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelClick" text="Cancel" />
+                <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onOkClick" text="%ok" />
+                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelClick" text="%cancel" />
             </buttons>
         </ButtonBar>
-      <Label text="Broj stanovnika:" GridPane.rowIndex="1" />
+      <Label text="%brojStanovnikaGrada" GridPane.rowIndex="1" />
       <TextField fx:id="fieldBrojStanovnika" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     </children>
     <padding>
