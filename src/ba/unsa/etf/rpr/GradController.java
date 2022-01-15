@@ -5,9 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class GradController {
     public TextField fieldNaziv;
@@ -16,6 +20,7 @@ public class GradController {
     private ArrayList<Drzava> drzave;
     private Grad grad;
     private boolean ok = false;
+    public ImageView imgGrad;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
         this.grad = grad;
@@ -30,7 +35,9 @@ public class GradController {
             choiceDrzava.getSelectionModel().select(grad.getDrzava());
             fieldNaziv.setText(grad.getNaziv());
             fieldBrojStanovnika.setText(String.valueOf(grad.getBrojStanovnika()));
+            imgGrad.setImage(new Image(grad.getSlika()));
         }
+        else imgGrad.setImage(new Image("/img/question_mark.jpg"));
     }
 
     public void onOkClick(ActionEvent actionEvent) {
@@ -74,6 +81,19 @@ public class GradController {
         grad.setNaziv(fieldNaziv.getText());
         grad.setBrojStanovnika(Integer.parseInt(fieldBrojStanovnika.getText()));
         grad.setDrzava(choiceDrzava.getValue());
+        grad.setSlika(imgGrad.getImage().getUrl());
         return grad;
+    }
+
+    public void promijeniAction(ActionEvent actionEvent) {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Promjena slike");
+        textInputDialog.setHeaderText("Unesite put gdje se nalazi fotografija grada:");
+        textInputDialog.setContentText("Put:");
+
+        Optional<String> result = textInputDialog.showAndWait();
+        result.ifPresent(url -> {
+            imgGrad.setImage(new Image(url));
+        });
     }
 }
