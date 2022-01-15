@@ -5,6 +5,7 @@ public class Grad {
     private String naziv;
     private int brojStanovnika;
     private Drzava drzava;
+    private String slika;
 
     public Grad() {}
 
@@ -13,6 +14,15 @@ public class Grad {
         this.naziv = naziv;
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
+        this.slika = "/img/question_mark.jpg";
+    }
+
+    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava, String slika) {
+        this.id = id;
+        this.naziv = naziv;
+        this.brojStanovnika = brojStanovnika;
+        this.drzava = drzava;
+        this.slika = slika;
     }
 
     public int getId() {
@@ -50,5 +60,13 @@ public class Grad {
     @Override
     public String toString() {
         return naziv;
+    }
+
+    public String getSlika() {
+        return slika;
+    }
+
+    public void setSlika(String slika) {
+        this.slika = slika;
     }
 }
