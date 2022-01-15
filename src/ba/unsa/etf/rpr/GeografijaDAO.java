@@ -40,11 +40,11 @@ public class GeografijaDAO {
             dajGradPoNazivuUpit = connection.prepareStatement("SELECT * FROM grad WHERE naziv=?");
             dajDrzavuPoNazivuUpit = connection.prepareStatement("SELECT * FROM drzava WHERE naziv=?");
             dajGlavniGradUpit = connection.prepareStatement("SELECT g.* FROM grad g, drzava d WHERE d.naziv=? AND g.drzava=d.id");
-            dodajGradUpit = connection.prepareStatement("INSERT INTO grad VALUES(?,?,?,?)");
+            dodajGradUpit = connection.prepareStatement("INSERT INTO grad VALUES(?,?,?,?,?)");
             dodajDrzavuUpit = connection.prepareStatement("INSERT INTO drzava VALUES(?,?,?)");
             dajIdNovogGradaUpit = connection.prepareStatement("SELECT MAX(id)+1 FROM grad");
             dajIdNoveDrzaveUpit = connection.prepareStatement("SELECT MAX(id)+1 FROM drzava");
-            izmijeniGradUpit = connection.prepareStatement("UPDATE grad SET naziv=?, broj_stanovnika=?, drzava=? WHERE id=?");
+            izmijeniGradUpit = connection.prepareStatement("UPDATE grad SET naziv=?, broj_stanovnika=?, drzava=?, slika=? WHERE id=?");
             obrisiGradUpit = connection.prepareStatement("DELETE FROM grad WHERE id=?");
             obrisiDrzavuUpit = connection.prepareStatement("DELETE FROM drzava WHERE naziv=?");
             obrisiGradoveDrzaveUpit = connection.prepareStatement("DELETE FROM grad WHERE drzava=?");
@@ -108,7 +108,7 @@ public class GeografijaDAO {
         try {
             ResultSet resultSet = dajGradoveUpit.executeQuery();
             while(resultSet.next()) {
-                Grad grad = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null);
+                Grad grad = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null, resultSet.getString(5));
                 dajDrzavuUpit.setInt(1, resultSet.getInt(4));
                 ResultSet rs1 = dajDrzavuUpit.executeQuery();
                 if(rs1.next())
@@ -144,7 +144,7 @@ public class GeografijaDAO {
             dajGlavniGradUpit.setString(1, drzava);
             ResultSet resultSet = dajGlavniGradUpit.executeQuery();
             if(!resultSet.next()) return null;
-            Grad grad = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null);
+            Grad grad = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null, resultSet.getString(5));
             dajDrzavuUpit.setInt(1, resultSet.getInt(4));
             ResultSet rs = dajDrzavuUpit.executeQuery();
             if(rs.next())
@@ -175,7 +175,7 @@ public class GeografijaDAO {
             dajGradPoNazivuUpit.setString(1, grad);
             ResultSet resultSet = dajGradPoNazivuUpit.executeQuery();
             if(resultSet.next()) {
-                Grad g = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null);
+                Grad g = new Grad(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3), null, resultSet.getString(5));
                 dajDrzavuUpit.setInt(1, resultSet.getInt(4));
                 ResultSet rs = dajDrzavuUpit.executeQuery();
                 if(rs.next()) {
@@ -219,6 +219,7 @@ public class GeografijaDAO {
             dodajGradUpit.setString(2, grad.getNaziv());
             dodajGradUpit.setInt(3, grad.getBrojStanovnika());
             dodajGradUpit.setInt(4, grad.getDrzava().getId());
+            dodajGradUpit.setString(5, grad.getSlika());
             dodajGradUpit.executeUpdate();
             grad.setId(id);
         } catch (SQLException e) {
@@ -244,10 +245,11 @@ public class GeografijaDAO {
 
     public void izmijeniGrad(Grad grad) {
         try {
-            izmijeniGradUpit.setInt(4, grad.getId());
+            izmijeniGradUpit.setInt(5, grad.getId());
             izmijeniGradUpit.setString(1, grad.getNaziv());
             izmijeniGradUpit.setInt(2, grad.getBrojStanovnika());
             izmijeniGradUpit.setInt(3, grad.getDrzava().getId());
+            izmijeniGradUpit.setString(4, grad.getSlika());
             izmijeniGradUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
