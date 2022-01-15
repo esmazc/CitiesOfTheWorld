@@ -13,6 +13,10 @@ public class GeografijaDAO {
     private PreparedStatement dajGradUpit, dajGradoveUpit, dajDrzavuUpit, dajDrzavuPoNazivuUpit, dajGlavniGradUpit, dodajGradUpit, dodajDrzavuUpit, obrisiGradUpit,
             dajIdNovogGradaUpit, dajIdNoveDrzaveUpit, izmijeniGradUpit, obrisiDrzavuUpit, obrisiGradoveDrzaveUpit, dajDrzaveUpit, dajGradPoNazivuUpit;
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     private GeografijaDAO() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:baza.db");
