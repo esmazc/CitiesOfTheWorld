@@ -13,6 +13,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+import java.util.ResourceBundle;
+
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +28,8 @@ class DrzavaControllerTest {
     public void start (Stage stage) throws Exception {
         GeografijaDAO dao = GeografijaDAO.getInstance();
         dao.vratiBazuNaDefault();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/drzava.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/drzava.fxml"), bundle);
         ctrl = new DrzavaController(null, dao.gradovi());
         loader.setController(ctrl);
         Parent root = loader.load();

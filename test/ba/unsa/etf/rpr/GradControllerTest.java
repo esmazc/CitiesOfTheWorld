@@ -14,6 +14,8 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
+import java.util.ResourceBundle;
+
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +30,8 @@ class GradControllerTest {
         GeografijaDAO dao = GeografijaDAO.getInstance();
         dao.vratiBazuNaDefault();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/grad.fxml"), bundle);
         ctrl = new GradController(null, dao.drzave());
         loader.setController(ctrl);
         Parent root = loader.load();
