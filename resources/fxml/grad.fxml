@@ -3,6 +3,7 @@
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <GridPane alignment="CENTER" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
@@ -12,6 +13,8 @@
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints />
+      <ColumnConstraints minWidth="10.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints />
@@ -24,7 +27,8 @@
         <Label text="%drzavaNaziv" GridPane.rowIndex="2" />
         <TextField fx:id="fieldNaziv" GridPane.columnIndex="1" />
         <ChoiceBox fx:id="choiceDrzava" prefHeight="26.0" prefWidth="132.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <ImageView fx:id="imgGrad" fitHeight="86.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowSpan="3" />
+        <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="3">
             <buttons>
                 <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onOkClick" text="%ok" />
                 <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancelClick" text="%cancel" />
@@ -32,6 +36,7 @@
         </ButtonBar>
       <Label text="%brojStanovnikaGrada" GridPane.rowIndex="1" />
       <TextField fx:id="fieldBrojStanovnika" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#promijeniAction" prefWidth="115.0" text="Promijeni" GridPane.columnIndex="3" />
     </children>
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
