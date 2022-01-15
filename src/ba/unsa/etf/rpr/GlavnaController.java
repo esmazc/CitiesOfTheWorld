@@ -155,4 +155,40 @@ public class GlavnaController {
         }
     }
 
+    public void jezikAction(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        ChoiceDialog<String> choiceDialog = new ChoiceDialog<String>(/*bundle.getString("jezik")*/);
+        ObservableList<String> list = choiceDialog.getItems();
+        list.add("Bosanski");
+        list.add("Deutsch");
+        list.add("English");
+        list.add("Français");
+        choiceDialog.setSelectedItem(choiceDialog.getItems().get(2));
+        choiceDialog.setTitle(bundle.getString("jezik"));
+        choiceDialog.setHeaderText(bundle.getString("izaberiteJezik"));
+        choiceDialog.showAndWait();
+        if(choiceDialog.getSelectedItem() != null) {
+            if (choiceDialog.getSelectedItem().equals("Bosanski"))
+                Locale.setDefault(new Locale("bs", "BA"));
+            else if (choiceDialog.getSelectedItem().equals("Deutsch"))
+                Locale.setDefault(new Locale("de", "DE"));
+            else if (choiceDialog.getSelectedItem().equals("English"))
+                Locale.setDefault(new Locale("en", "US"));
+            else if (choiceDialog.getSelectedItem().equals("Français"))
+                Locale.setDefault(new Locale("fr", "FR"));
+        }
+        try {
+            GlavnaController ctrl = new GlavnaController();
+            Stage stage = (Stage)tableViewGradovi.getScene().getWindow();
+            ResourceBundle bundle1 = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/glavna.fxml"), bundle1);
+            loader.setController(ctrl);
+            Parent root = loader.load();
+            stage.setTitle(bundle.getString("gradoviSvijeta"));
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
