@@ -1,8 +1,23 @@
 package ba.unsa.etf.rpr;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    public static void main(String[] args) {
-        System.out.println("Sretno rješavanje zadaće 5 :)");
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        //GeografijaDAO dao = GeografijaDAO.getInstance();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/glavna.fxml"));
+        //GlavnaController glavnaController = new GlavnaController(dao);
+        GlavnaController glavnaController = new GlavnaController();
+        loader.setController(glavnaController);
+        Parent root = loader.load();
+        primaryStage.setTitle("Gradovi svijeta");
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.show();
     }
 }
