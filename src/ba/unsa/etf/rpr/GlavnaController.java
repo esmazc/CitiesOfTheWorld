@@ -2,21 +2,23 @@ package ba.unsa.etf.rpr;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -53,7 +55,8 @@ public class GlavnaController {
 
     public void dodajGradAction(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/grad.fxml" ), bundle);
             GradController gradController = new GradController(null, dao.drzave());
             loader.setController(gradController);
             Parent root = loader.load();
@@ -79,7 +82,8 @@ public class GlavnaController {
         Drzava drzava = null;
         if(grad != null) drzava = grad.getDrzava();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/drzava.fxml"));
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/drzava.fxml" ), bundle);
             DrzavaController drzavaController = new DrzavaController(drzava, dao.gradovi());
             loader.setController(drzavaController);
             Parent root = loader.load();
@@ -102,7 +106,8 @@ public class GlavnaController {
         Grad grad = tableViewGradovi.getSelectionModel().getSelectedItem();
         try {
             if(grad != null) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grad.fxml"));
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/grad.fxml" ), bundle);
                 GradController gradController = new GradController(grad, dao.drzave());
                 loader.setController(gradController);
                 Parent root = loader.load();
@@ -127,10 +132,11 @@ public class GlavnaController {
     public void obrisiGradAction(ActionEvent actionEvent) {
         Grad grad = tableViewGradovi.getSelectionModel().getSelectedItem();
         if(grad != null) {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Potvrdite brisanje");
-            alert.setHeaderText("Brisanje grada " + grad.getNaziv());
-            alert.setContentText("Da li ste sigurni da želite obrisati grad " + grad.getNaziv() + "?");
+            alert.setTitle(bundle.getString("potvrdaBrisanja"));
+            alert.setHeaderText(bundle.getString("brisanjeGrada") + grad.getNaziv());
+            alert.setContentText(bundle.getString("pitanje") + grad.getNaziv() + "?");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
@@ -140,4 +146,13 @@ public class GlavnaController {
             }
         }
     }
+
+    public void stampaAction(ActionEvent actionEvent) {
+        try {
+            new GradoviReport().showReport(dao.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
 }
