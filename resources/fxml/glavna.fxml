@@ -4,24 +4,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
-      <ColumnConstraints minWidth="-Infinity" />
+      <ColumnConstraints minWidth="125.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TableView fx:id="tableViewGradovi" prefHeight="200.0" prefWidth="477.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <TableView fx:id="tableViewGradovi" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
         <columns>
           <TableColumn fx:id="colGradId" prefWidth="75.0" text="%id" />
           <TableColumn fx:id="colGradNaziv" prefWidth="100.0" text="%naziv" />
             <TableColumn fx:id="colGradStanovnika" prefWidth="100.0" text="%brojStanovnika" />
-            <TableColumn fx:id="colGradDrzava" prefWidth="200.0" text="%drzava" />
+            <TableColumn fx:id="colGradDrzava" prefWidth="185.0" text="%drzava" />
+            <TableColumn fx:id="colGradPostanskiBroj" prefWidth="108.39993286132812" text="Poštanski broj" />
         </columns>
       </TableView>
-      <VBox prefWidth="120.0" spacing="5.0" GridPane.columnIndex="1">
+      <VBox minWidth="125.0" spacing="5.0" GridPane.columnIndex="1">
          <children>
             <Button fx:id="btnDodajGrad" mnemonicParsing="false" onAction="#dodajGradAction" prefWidth="115.0" text="%dodajGrad" />
             <Button fx:id="btnDodajDrzavu" mnemonicParsing="false" onAction="#dodajDrzavuAction" prefWidth="115.0" text="%dodajDrzavu" />
