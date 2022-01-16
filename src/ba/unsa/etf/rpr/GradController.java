@@ -114,7 +114,7 @@ public class GradController {
     }
 
     public void promijeniAction(ActionEvent actionEvent) {
-        TextInputDialog textInputDialog = new TextInputDialog();
+        /*TextInputDialog textInputDialog = new TextInputDialog();
         textInputDialog.setTitle("Promjena slike");
         textInputDialog.setHeaderText("Unesite put gdje se nalazi fotografija grada:");
         textInputDialog.setContentText("Put:");
@@ -122,6 +122,25 @@ public class GradController {
         Optional<String> result = textInputDialog.showAndWait();
         result.ifPresent(url -> {
             imgGrad.setImage(new Image(url));
-        });
+        });*/
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/pretraga.fxml" ), bundle);
+            PretragaController pretragaController = new PretragaController();
+            loader.setController(pretragaController);
+            Parent root = null;
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle(bundle.getString("pretraga"));
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+
+            stage.setOnHidden(event -> {
+                if(pretragaController.getPath() != null)
+                    imgGrad.setImage(new Image(pretragaController.getPath()));
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
