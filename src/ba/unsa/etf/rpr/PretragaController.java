@@ -58,4 +58,8 @@ public class PretragaController {
             getPaths(directory.getAbsolutePath(), pattern);
         }
     }
+
+    public String getPath() {
+        return path;
+    }
 }
