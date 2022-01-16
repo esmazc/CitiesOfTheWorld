@@ -3,6 +3,9 @@ package ba.unsa.etf.rpr;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -10,8 +13,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.ResourceBundle;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GradController {
     public TextField fieldNaziv;
@@ -21,6 +32,7 @@ public class GradController {
     private Grad grad;
     private boolean ok = false;
     public ImageView imgGrad;
+    public TextField fldPostanskiBroj;
 
     public GradController(Grad grad, ArrayList<Drzava> drzave) {
         this.grad = grad;
@@ -36,20 +48,26 @@ public class GradController {
             fieldNaziv.setText(grad.getNaziv());
             fieldBrojStanovnika.setText(String.valueOf(grad.getBrojStanovnika()));
             imgGrad.setImage(new Image(grad.getSlika()));
+            fldPostanskiBroj.setText(String.valueOf(grad.getPostanskiBroj()));
         }
         else imgGrad.setImage(new Image("/img/question_mark.jpg"));
     }
 
     public void onOkClick(ActionEvent actionEvent) {
-        boolean fieldNazivOk, fieldBrojStanovnikaOk;
+        boolean fieldNazivOk, fieldBrojStanovnikaOk, fldPostanskiBrojOk;
         fieldNazivOk = !fieldNaziv.getText().isBlank();
         int brojStanovnika = 0;
         try {
             brojStanovnika = Integer.parseInt(fieldBrojStanovnika.getText());
         } catch (NumberFormatException ignored) {}
         fieldBrojStanovnikaOk = brojStanovnika > 0;
+        int postanskiBroj = 0;
+        try {
+            postanskiBroj = Integer.parseInt(fldPostanskiBroj.getText());
+        } catch (NumberFormatException ignored) {}
+        fldPostanskiBrojOk = postanskiBroj > 0 || fldPostanskiBroj.getText().isBlank();
 
-        if(fieldNazivOk && fieldBrojStanovnikaOk) {
+        if(fieldNazivOk && fieldBrojStanovnikaOk && fldPostanskiBrojOk) {
             ok = true;
             ((Stage) fieldNaziv.getScene().getWindow()).close();
         }
@@ -69,6 +87,14 @@ public class GradController {
             fieldBrojStanovnika.getStyleClass().removeAll("poljeNeispravno");
             fieldBrojStanovnika.getStyleClass().add("poljeIspravno");
         }
+        if(!fldPostanskiBrojOk) {
+            fldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
+            fldPostanskiBroj.getStyleClass().add("poljeNeispravno");
+        }
+        else {
+            fldPostanskiBroj.getStyleClass().removeAll("poljeNeispravno");
+            fldPostanskiBroj.getStyleClass().add("poljeIspravno");
+        }
     }
 
     public void onCancelClick(ActionEvent actionEvent) {
@@ -82,6 +108,8 @@ public class GradController {
         grad.setBrojStanovnika(Integer.parseInt(fieldBrojStanovnika.getText()));
         grad.setDrzava(choiceDrzava.getValue());
         grad.setSlika(imgGrad.getImage().getUrl());
+        if(!fldPostanskiBroj.getText().trim().equals(""))
+            grad.setPostanskiBroj(Integer.parseInt(fldPostanskiBroj.getText()));
         return grad;
     }
 
