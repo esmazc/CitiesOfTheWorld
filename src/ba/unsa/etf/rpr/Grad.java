@@ -6,6 +6,7 @@ public class Grad {
     private int brojStanovnika;
     private Drzava drzava;
     private String slika;
+    private int postanskiBroj;
 
     public Grad() {}
 
@@ -15,14 +16,16 @@ public class Grad {
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
         this.slika = "/img/question_mark.jpg";
+        this.postanskiBroj = 0;
     }
 
-    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava, String slika) {
+    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava, String slika, int postanskiBroj) {
         this.id = id;
         this.naziv = naziv;
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
         this.slika = slika;
+        this.postanskiBroj = postanskiBroj;
     }
 
     public int getId() {
@@ -68,5 +71,13 @@ public class Grad {
 
     public void setSlika(String slika) {
         this.slika = slika;
+    }
+
+    public int getPostanskiBroj() {
+        return postanskiBroj;
+    }
+
+    public void setPostanskiBroj(int postanskiBroj) {
+        this.postanskiBroj = postanskiBroj;
     }
 }
