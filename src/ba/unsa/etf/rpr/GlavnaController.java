@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
@@ -31,6 +30,7 @@ public class GlavnaController {
     public TableColumn<Grad, String> colGradNaziv;
     public TableColumn<Grad, String> colGradStanovnika;*/
     public TableColumn<Grad, String> colGradDrzava;
+    public TableColumn colGradPostanskiBroj;
     private GeografijaDAO dao;
 
     /*public GlavnaController(GeografijaDAO dao) {
@@ -51,6 +51,7 @@ public class GlavnaController {
         colGradNaziv.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNaziv()));
         colGradStanovnika.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBrojStanovnika())));*/
         colGradDrzava.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDrzava().getNaziv()));
+        colGradPostanskiBroj.setCellValueFactory(new PropertyValueFactory("postanskiBroj"));
     }
 
     public void dodajGradAction(ActionEvent actionEvent) {
@@ -61,7 +62,7 @@ public class GlavnaController {
             loader.setController(gradController);
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Grad");
+            stage.setTitle(bundle.getString("grad"));
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
             stage.setOnHidden(e -> {
@@ -88,7 +89,7 @@ public class GlavnaController {
             loader.setController(drzavaController);
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Država");
+            stage.setTitle(bundle.getString("drzava"));
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
             stage.setOnHidden(e -> {
@@ -112,7 +113,7 @@ public class GlavnaController {
                 loader.setController(gradController);
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setTitle("Grad");
+                stage.setTitle(bundle.getString("grad"));
                 stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
                 stage.show();
                 stage.setOnHidden(e -> {
@@ -157,7 +158,7 @@ public class GlavnaController {
 
     public void jezikAction(ActionEvent actionEvent) {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-        ChoiceDialog<String> choiceDialog = new ChoiceDialog<String>(/*bundle.getString("jezik")*/);
+        ChoiceDialog<String> choiceDialog = new ChoiceDialog<>();
         ObservableList<String> list = choiceDialog.getItems();
         list.add("Bosanski");
         list.add("Deutsch");
