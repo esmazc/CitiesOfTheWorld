@@ -18,6 +18,17 @@ public class PretragaController {
     private String path;
     private boolean kraj = false;
 
+    @FXML
+    public void initialize() {
+        listOfPaths.setOnMouseClicked(me -> {
+            if(me.getClickCount() == 2) {
+                kraj = true;
+                path = listOfPaths.getSelectionModel().getSelectedItem().toString();
+                ((Stage)fieldUzorak.getScene().getWindow()).close();
+            }
+        });
+    }
+
     private void getPaths(String directory, String pattern) {
         new Thread(() -> {
             File[] files = new File(directory).listFiles();
