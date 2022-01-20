@@ -14,13 +14,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //GeografijaDAO dao = GeografijaDAO.getInstance();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavna.fxml" ), bundle);
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavna.fxml"), bundle);
         //GlavnaController glavnaController = new GlavnaController(dao);
         GlavnaController glavnaController = new GlavnaController();
         loader.setController(glavnaController);
         Parent root = loader.load();
         primaryStage.setTitle(bundle.getString("gradoviSvijeta"));
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
     }
 }
