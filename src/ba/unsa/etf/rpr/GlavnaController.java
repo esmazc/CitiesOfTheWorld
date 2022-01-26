@@ -30,7 +30,8 @@ public class GlavnaController {
     public TableColumn<Grad, String> colGradNaziv;
     public TableColumn<Grad, String> colGradStanovnika;*/
     public TableColumn<Grad, String> colGradDrzava;
-    public TableColumn colGradPostanskiBroj;
+    //public TableColumn colGradPostanskiBroj;
+    public TableColumn<Grad, String> colGradPostanskiBroj;
     private GeografijaDAO dao;
 
     /*public GlavnaController(GeografijaDAO dao) {
@@ -51,7 +52,13 @@ public class GlavnaController {
         colGradNaziv.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNaziv()));
         colGradStanovnika.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBrojStanovnika())));*/
         colGradDrzava.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDrzava().getNaziv()));
-        colGradPostanskiBroj.setCellValueFactory(new PropertyValueFactory("postanskiBroj"));
+        //colGradPostanskiBroj.setCellValueFactory(new PropertyValueFactory("postanskiBroj"));
+        colGradPostanskiBroj.setCellValueFactory(data -> {
+            String postanskiBroj = String.valueOf(data.getValue().getPostanskiBroj());
+            if(postanskiBroj.equals("0"))
+                return new SimpleStringProperty("");
+            return new SimpleStringProperty(postanskiBroj);
+        });
     }
 
     public void dodajGradAction(ActionEvent actionEvent) {
@@ -186,7 +193,7 @@ public class GlavnaController {
             loader.setController(ctrl);
             Parent root = loader.load();
             stage.setTitle(bundle.getString("gradoviSvijeta"));
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, stage.getWidth() - 15, stage.getHeight() - 35));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
