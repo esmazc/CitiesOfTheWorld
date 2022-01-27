@@ -20,6 +20,7 @@ public class PretragaController {
 
     @FXML
     public void initialize() {
+        //SLIKA SE BIRA DVOSTRUKIM KLIKOM MISA
         listOfPaths.setOnMouseClicked(me -> {
             if(me.getClickCount() == 2) {
                 kraj = true;
