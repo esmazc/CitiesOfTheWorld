@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,53 +49,70 @@ public class GradController {
             fieldNaziv.setText(grad.getNaziv());
             fieldBrojStanovnika.setText(String.valueOf(grad.getBrojStanovnika()));
             imgGrad.setImage(new Image(grad.getSlika()));
-            fldPostanskiBroj.setText(String.valueOf(grad.getPostanskiBroj()));
+            if(grad.getPostanskiBroj() != 0) fldPostanskiBroj.setText(String.valueOf(grad.getPostanskiBroj()));
         }
         else imgGrad.setImage(new Image("/img/question_mark.jpg"));
     }
 
-    public void onOkClick(ActionEvent actionEvent) {
-        boolean fieldNazivOk, fieldBrojStanovnikaOk, fldPostanskiBrojOk;
-        fieldNazivOk = !fieldNaziv.getText().isBlank();
-        int brojStanovnika = 0;
-        try {
-            brojStanovnika = Integer.parseInt(fieldBrojStanovnika.getText());
-        } catch (NumberFormatException ignored) {}
-        fieldBrojStanovnikaOk = brojStanovnika > 0;
-        int postanskiBroj = 0;
-        try {
-            postanskiBroj = Integer.parseInt(fldPostanskiBroj.getText());
-        } catch (NumberFormatException ignored) {}
-        fldPostanskiBrojOk = postanskiBroj > 0 || fldPostanskiBroj.getText().isBlank();
-
-        if(fieldNazivOk && fieldBrojStanovnikaOk && fldPostanskiBrojOk) {
-            ok = true;
-            ((Stage) fieldNaziv.getScene().getWindow()).close();
-        }
-        if(!fieldNazivOk) {
-            fieldNaziv.getStyleClass().removeAll("poljeIspravno");
-            fieldNaziv.getStyleClass().add("poljeNeispravno");
-        }
-        else {
-            fieldNaziv.getStyleClass().removeAll("poljeNeispravno");
-            fieldNaziv.getStyleClass().add("poljeIspravno");
-        }
-        if(!fieldBrojStanovnikaOk) {
-            fieldBrojStanovnika.getStyleClass().removeAll("poljeIspravno");
-            fieldBrojStanovnika.getStyleClass().add("poljeNeispravno");
-        }
-        else {
-            fieldBrojStanovnika.getStyleClass().removeAll("poljeNeispravno");
-            fieldBrojStanovnika.getStyleClass().add("poljeIspravno");
-        }
-        if(!fldPostanskiBrojOk) {
-            fldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
-            fldPostanskiBroj.getStyleClass().add("poljeNeispravno");
-        }
-        else {
-            fldPostanskiBroj.getStyleClass().removeAll("poljeNeispravno");
-            fldPostanskiBroj.getStyleClass().add("poljeIspravno");
-        }
+    public void onOkClick(ActionEvent actionEvent) { //KOMENTARE OVE METODE OTKOMENTARISATI DA BI PROGRAM ISPRAVNO RADIO I DA BI TEST testZadatak6 PROSAO
+        //new Thread(() -> {
+            boolean fieldNazivOk, fieldBrojStanovnikaOk, fldPostanskiBrojOk = false;
+            fieldNazivOk = !fieldNaziv.getText().isBlank();
+            int brojStanovnika = 0;
+            try {
+                brojStanovnika = Integer.parseInt(fieldBrojStanovnika.getText());
+            } catch (NumberFormatException ignored) {}
+            fieldBrojStanovnikaOk = brojStanovnika > 0;
+            int postanskiBroj = 0;
+            try {
+                postanskiBroj = Integer.parseInt(fldPostanskiBroj.getText());
+            } catch (NumberFormatException ignored) {}
+            fldPostanskiBrojOk = postanskiBroj > 0 || fldPostanskiBroj.getText().isBlank();
+            /*if(!fldPostanskiBroj.getText().isBlank()) {
+                try {
+                    URL url = new URL("http://c9.etf.unsa.ba/proba/postanskiBroj.php?postanskiBroj=" + fldPostanskiBroj.getText());
+                    URLConnection yc = url.openConnection();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
+                    String inputLine = in.readLine();
+                    //while ((inputLine = in.readLine()) != null);
+                    fldPostanskiBrojOk = inputLine.equals("OK");
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }*/
+            boolean finalFldPostanskiBrojOk = fldPostanskiBrojOk;
+            Platform.runLater(() -> {
+                if(fieldNazivOk && fieldBrojStanovnikaOk && finalFldPostanskiBrojOk) {
+                    ok = true;
+                    ((Stage) fieldNaziv.getScene().getWindow()).close();
+                }
+                if(!fieldNazivOk) {
+                    fieldNaziv.getStyleClass().removeAll("poljeIspravno");
+                    fieldNaziv.getStyleClass().add("poljeNeispravno");
+                }
+                else {
+                    fieldNaziv.getStyleClass().removeAll("poljeNeispravno");
+                    fieldNaziv.getStyleClass().add("poljeIspravno");
+                }
+                if(!fieldBrojStanovnikaOk) {
+                    fieldBrojStanovnika.getStyleClass().removeAll("poljeIspravno");
+                    fieldBrojStanovnika.getStyleClass().add("poljeNeispravno");
+                }
+                else {
+                    fieldBrojStanovnika.getStyleClass().removeAll("poljeNeispravno");
+                    fieldBrojStanovnika.getStyleClass().add("poljeIspravno");
+                }
+                if(!finalFldPostanskiBrojOk) {
+                    fldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
+                    fldPostanskiBroj.getStyleClass().add("poljeNeispravno");
+                }
+                else {
+                    fldPostanskiBroj.getStyleClass().removeAll("poljeNeispravno");
+                    fldPostanskiBroj.getStyleClass().add("poljeIspravno");
+                }
+            });
+        //}).start();
     }
 
     public void onCancelClick(ActionEvent actionEvent) {
