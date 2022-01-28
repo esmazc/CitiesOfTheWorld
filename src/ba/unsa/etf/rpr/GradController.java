@@ -68,7 +68,7 @@ public class GradController {
                 postanskiBroj = Integer.parseInt(fldPostanskiBroj.getText());
             } catch (NumberFormatException ignored) {}
             fldPostanskiBrojOk = postanskiBroj > 0 || fldPostanskiBroj.getText().isBlank();
-            /*if(!fldPostanskiBroj.getText().isBlank()) {
+            /*if(!fldPostanskiBroj.getText().isBlank() && choiceDrzava.getValue().getNaziv().equals("Bosna i Hercegovina")) {
                 try {
                     URL url = new URL("http://c9.etf.unsa.ba/proba/postanskiBroj.php?postanskiBroj=" + fldPostanskiBroj.getText());
                     URLConnection yc = url.openConnection();
