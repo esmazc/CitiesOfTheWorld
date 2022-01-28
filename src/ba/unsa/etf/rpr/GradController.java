@@ -54,7 +54,9 @@ public class GradController {
         else imgGrad.setImage(new Image("/img/question_mark.jpg"));
     }
 
-    public void onOkClick(ActionEvent actionEvent) { //KOMENTARE OVE METODE OTKOMENTARISATI DA BI PROGRAM ISPRAVNO RADIO I DA BI TEST testZadatak6 PROSAO
+    public void onOkClick(ActionEvent actionEvent) { //KOMENTARE OVE METODE (osim prvog) OTKOMENTARISATI DA BI PROGRAM ISPRAVNO RADIO
+        /*testZadatak6 ne moze proci iz razloga sto je u testu drzava Francuska, a ne Bosna i Hercegovina,
+        te se postanski broj nece validirati pomocu servisa*/
         //new Thread(() -> {
             boolean fieldNazivOk, fieldBrojStanovnikaOk, fldPostanskiBrojOk = false;
             fieldNazivOk = !fieldNaziv.getText().isBlank();
