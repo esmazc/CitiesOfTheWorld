@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="Times New Roman">
+        <normal><![CDATA[reports/TimesNewRomanFontFamily/times_new_roman.ttf]]></normal>
+        <bold><![CDATA[reports/TimesNewRomanFontFamily/times_new_roman_bold.ttf]]></bold>
+        <italic><![CDATA[reports/TimesNewRomanFontFamily/times_new_roman_italic.ttf]]></italic>
+        <boldItalic><![CDATA[reports/TimesNewRomanFontFamily/times_new_roman_bold_italic.ttf]]></boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+    </fontFamily>
+</fontFamilies>
