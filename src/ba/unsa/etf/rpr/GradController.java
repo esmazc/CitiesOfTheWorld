@@ -103,13 +103,14 @@ public class GradController {
                     fieldBrojStanovnika.getStyleClass().removeAll("poljeNeispravno");
                     fieldBrojStanovnika.getStyleClass().add("poljeIspravno");
                 }
-                if(!finalFldPostanskiBrojOk) {
-                    fldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
-                    fldPostanskiBroj.getStyleClass().add("poljeNeispravno");
-                }
-                else {
-                    fldPostanskiBroj.getStyleClass().removeAll("poljeNeispravno");
-                    fldPostanskiBroj.getStyleClass().add("poljeIspravno");
+                if(!fldPostanskiBroj.getText().isBlank()) {
+                    if (!finalFldPostanskiBrojOk) {
+                        fldPostanskiBroj.getStyleClass().removeAll("poljeIspravno");
+                        fldPostanskiBroj.getStyleClass().add("poljeNeispravno");
+                    } else {
+                        fldPostanskiBroj.getStyleClass().removeAll("poljeNeispravno");
+                        fldPostanskiBroj.getStyleClass().add("poljeIspravno");
+                    }
                 }
             });
         //}).start();
