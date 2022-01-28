@@ -129,6 +129,7 @@ public class GradController {
         grad.setSlika(imgGrad.getImage().getUrl());
         if(!fldPostanskiBroj.getText().trim().equals(""))
             grad.setPostanskiBroj(Integer.parseInt(fldPostanskiBroj.getText()));
+        else grad.setPostanskiBroj(0);
         return grad;
     }
 
